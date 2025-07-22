@@ -322,4 +322,6 @@ public partial class AppDBContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
 }
