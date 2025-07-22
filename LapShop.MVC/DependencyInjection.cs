@@ -14,6 +14,8 @@ public static class DependencyInjection
 		services.AddDatabaseConfig(configuration);
 
 		services.AddScoped<ICategoryService , CategoryService>();
+		services.AddScoped<IFileService, FileService>();
+
 		return services;
 	}
 

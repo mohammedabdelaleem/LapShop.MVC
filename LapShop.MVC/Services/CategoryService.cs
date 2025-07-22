@@ -15,7 +15,6 @@ public class CategoryService(AppDBContext context) : ICategoryService
 
 	public async Task AddAsync(TbCategory category, CancellationToken cancellationToken)
 	{
-
 		category.CreatedDate = DateTime.UtcNow;
 		category.CreatedBy = "1";
 
@@ -32,6 +31,7 @@ public class CategoryService(AppDBContext context) : ICategoryService
 		var categoryDB = await GetAsync(categoryId, cancellationToken);
 
 		updatedCategory.Adapt(categoryDB);
+
 		categoryDB.UpdatedDate = DateTime.UtcNow;
 		categoryDB.UpdatedBy = "1";
 		_context.Entry(categoryDB).State = EntityState.Modified;
@@ -41,5 +41,21 @@ public class CategoryService(AppDBContext context) : ICategoryService
 
 		await _context.SaveChangesAsync(cancellationToken);
 		return true;
+	}
+
+	public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
+	{
+		 _context.Remove(await GetAsync(id, cancellationToken));	
+		 await _context.SaveChangesAsync(cancellationToken);
+		return true;
+	}
+
+	public async Task<string> GetImageFileAsync(int categoryId, CancellationToken cancellationToken)
+	{
+		var category = await GetAsync(categoryId, cancellationToken);
+
+		return (category != null && !string.IsNullOrEmpty(category.ImageName)) ? 
+					 category.ImageName : "x.png";
+		
 	}
 }

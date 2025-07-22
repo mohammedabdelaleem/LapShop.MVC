@@ -35,10 +35,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputUsername1">
+                            <label >
                                 @ResAdmin.lblImage
                             </label>
-                            <input asp-for="ImageName" type="file" name="Files"
+                            <input asp-for="ImageName" type="file" name="file"
                             class="form-control" placeholder="@ResAdmin.lblImage"
                             onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, ,.gif">
 
@@ -56,7 +56,7 @@
                 <div class="card-body">
                     <span id="tbImgName"></span>
                     <div id="tbImgSrc">
-                        <img src="/Uploads/Categories/@Model.ImageName" style="width:95%; height300px;" />
+                        <img src="~/Uploads/Categories/@Model.ImageName" style="width:95%; height:300px;" />
                     </div>
                 </div>
             </div>
