@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace LapShop.MVC.Area.Admin.Controllers
 {
-    [Area("admin")]
-    public class HomeController : Controller
+	[Area(SharedData.AdminArea)]
+	public class HomeController : Controller
     {
    
         public IActionResult Index()

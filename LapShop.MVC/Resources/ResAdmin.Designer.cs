@@ -79,6 +79,42 @@ namespace LapShop.MVC.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Item Name.
+        /// </summary>
+        public static string lblItemName {
+            get {
+                return ResourceManager.GetString("lblItemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item Type.
+        /// </summary>
+        public static string lblItemType {
+            get {
+                return ResourceManager.GetString("lblItemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string lblPrice {
+            get {
+                return ResourceManager.GetString("lblPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processor.
+        /// </summary>
+        public static string lblProcessor {
+            get {
+                return ResourceManager.GetString("lblProcessor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show In Home Page.
         /// </summary>
         public static string lblShowHomePage {

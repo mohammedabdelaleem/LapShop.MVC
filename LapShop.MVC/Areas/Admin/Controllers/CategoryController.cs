@@ -1,9 +1,6 @@
-﻿using LapShop.MVC.Models;
-using LapShop.MVC.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace LapShop.MVC.Areas.Admin.Controllers;
 
-namespace LapShop.MVC.Areas.Admin.Controllers;
-[Area("admin")]
+[Area(SharedData.AdminArea)]
 public class CategoryController(
 	ICategoryService categoryService,
 	IFileService fileService) : Controller

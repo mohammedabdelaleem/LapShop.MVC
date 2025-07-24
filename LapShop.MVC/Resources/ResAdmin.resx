@@ -123,6 +123,18 @@
   <data name="lblImage" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="lblItemName" xml:space="preserve">
+    <value>Item Name</value>
+  </data>
+  <data name="lblItemType" xml:space="preserve">
+    <value>Item Type</value>
+  </data>
+  <data name="lblPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblProcessor" xml:space="preserve">
+    <value>Processor</value>
+  </data>
   <data name="lblShowHomePage" xml:space="preserve">
     <value>Show In Home Page</value>
   </data>

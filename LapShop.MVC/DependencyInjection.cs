@@ -15,6 +15,8 @@ public static class DependencyInjection
 
 		services.AddScoped<ICategoryService , CategoryService>();
 		services.AddScoped<IFileService, FileService>();
+		services.AddScoped<IItemService, ItemService>();
+
 
 		return services;
 	}
