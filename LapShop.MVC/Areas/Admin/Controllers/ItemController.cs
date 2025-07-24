@@ -30,7 +30,7 @@ public class ItemController(
 
 
 		// Save selected values to ViewData or ViewBag
-		ViewBag.SelectedCategoryId = (categoryId.HasValue)? categoryId : null;
+		ViewBag.SelectedCategoryId = (categoryId.HasValue )? categoryId : null;
 		ViewBag.SelectedItemTypeId = (itemTypeId.HasValue) ? itemTypeId : null;
 
 		var result = await _itemService.GetAllItemsDataAsync(categoryId,itemTypeId,cancellationToken);

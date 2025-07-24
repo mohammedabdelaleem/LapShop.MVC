@@ -29,7 +29,7 @@
                             <select id="categorySelect" class="form-control"
                                     asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "CategoryName", ViewBag.SelectedCategoryId ?? "0"))"
                                     onchange="Search()">
-                                <option disabled selected value="0">-- Select Category --</option>
+                                <option  selected value="0">-- All --</option>
                             </select>
                         </div>
 
@@ -38,7 +38,7 @@
                             <select id="typeSelect" class="form-control"
                                     asp-items="@(new SelectList(ViewBag.ItemTypes, "ItemTypeId", "ItemTypeName", ViewBag.SelectedItemTypeId ?? "0"))"
                                     onchange="Search()">
-                                <option disabled selected value="0">-- Select Item Type --</option>
+                                <option selected value="0">-- All --</option>
                             </select>
                         </div>
                     </div>
