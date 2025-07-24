@@ -1,93 +1,111 @@
-﻿  @model List<VwItem>
+﻿@model List<VwItem>
 
-
-@section Styles
-{
-        <!-- Plugin css for this page -->
-        <link rel="stylesheet" href="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-        <!-- End plugin css for this page -->
-  }
-
+@section Styles {
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css" />
+}
 
 <div class="container-fluid page-body-wrapper">
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
-                <h3 class="page-title"> Data table </h3>
+                <h3 class="page-title">Data Table</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data table</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Table</li>
                     </ol>
                 </nav>
             </div>
+
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Data table</h4>
-                    <div class="row">
-                        <div class="col-12">
-                            <a asp-controller="Item" asp-action="List" asp-area="@SharedData.AdminArea" class="btn btn-success btn-fw">@ResGeneral.lblNew</a>
-                            <table id="order-listing" class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>@ResAdmin.lblImage </th>
-                                        <th>@ResAdmin.lblItemName</th>
-                                        <th>@ResAdmin.lblCategoryName</th>
-                                        <th>@ResAdmin.lblItemType</th>
-                                        <th>@ResAdmin.lblPrice</th>
-                                        <th>@ResGeneral.lblActions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                            <tr style="margin:0px;padding:0px;">
-                                                <td class="col-md-8">
-                                                    <img src="/Uploads/Items/@item.ImageName" alt="Alternate Text" />
-                                                </td>
+                    <h4 class="card-title">Items</h4>
 
-                                            <td class="col-md-8">@item.ItemName </td>
-                                            <td class="col-md-8">@item.CategoryName </td>
-                                            <td class="col-md-8">@item.ItemTypeId </td>
-                                            <td class="col-md-8">@item.SalesPrice </td>
+                    <!-- Filters -->
+                    <div class="row mb-4">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="categorySelect" class="form-label">Filter by Category:</label>
+                            <select id="categorySelect" class="form-control"
+                                    asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "CategoryName", ViewBag.SelectedCategoryId ?? "0"))"
+                                    onchange="Search()">
+                                <option disabled selected value="0">-- Select Category --</option>
+                            </select>
+                        </div>
 
-                                                <td class="col-md-4" style="margin:0px;padding:0px;">
-                                                    <a style="height:max-content"
-                                                       asp-controller="Item" asp-action="Edit" asp-route-id="@item.CategoryId"
-                                                       class="btn btn-info btn-fw">@ResGeneral.lblEdit</a>
-
-
-                                                    <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.CategoryId"
-                                                       class="btn btn-danger btn-fw"
-                                                       onclick="return confirm('Are you sure?');">@ResGeneral.lblDelete</a>
-                                                </td>
-                                            </tr>
-                                    }
-
-                                </tbody>
-                            </table>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="typeSelect" class="form-label">Filter by Item Type:</label>
+                            <select id="typeSelect" class="form-control"
+                                    asp-items="@(new SelectList(ViewBag.ItemTypes, "ItemTypeId", "ItemTypeName", ViewBag.SelectedItemTypeId ?? "0"))"
+                                    onchange="Search()">
+                                <option disabled selected value="0">-- Select Item Type --</option>
+                            </select>
                         </div>
                     </div>
+
+                    <!-- New Item Button -->
+                    <div class="mb-3">
+                        <a asp-controller="Item" asp-action="List" asp-area="@SharedData.AdminArea"
+                           class="btn btn-success">@ResGeneral.lblNew</a>
+                    </div>
+
+                    <!-- Data Table -->
+                    <table id="order-listing" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>@ResAdmin.lblItemName</th>
+                                <th>@ResAdmin.lblCategoryName</th>
+                                <th>@ResAdmin.lblItemType</th>
+                                <th>@ResAdmin.lblPrice</th>
+                                <th>@ResGeneral.lblActions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.ItemName</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.ItemTypeName</td>
+                                    <td>@item.SalesPrice</td>
+                                    <td>
+                                        <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.CategoryId"
+                                           class="btn btn-info btn-sm">@ResGeneral.lblEdit</a>
+
+                                        <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.CategoryId"
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure?');">@ResGeneral.lblDelete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <!-- content-wrapper ends -->
     </div>
-    <!-- main-panel ends -->
 </div>
 
-@section Scripts
-{
-        <!-- plugins:js -->
-        <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
-        <script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-        <!-- End plugin js for this page -->
-        <!-- Custom js for this page -->
-        <script src="~/Admin/js/data-table.js"></script>
-        <!-- End custom js for this page -->
-  }
+@section Scripts {
+    <!-- plugins:js -->
+    <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- Plugin js for this page -->
+    <script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <!-- Custom js for this page -->
+    <script src="~/Admin/js/data-table.js"></script>
 
+    <script>
+        function Search() {
+            const categoryId = document.getElementById("categorySelect").value;
+            const itemTypeId = document.getElementById("typeSelect").value;
 
+            const query = [];
+            if (categoryId) query.push(`categoryId=${categoryId}`);
+            if (itemTypeId) query.push(`itemTypeId=${itemTypeId}`);
+
+            const queryString = query.length ? "?" + query.join("&") : "";
+            window.location.href = `/admin/Item/Search${queryString}`;
+        }
+    </script>
+}

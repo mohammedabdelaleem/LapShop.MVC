@@ -10,8 +10,27 @@ public class ItemService(AppDBContext context) : IItemService
 	public async Task<List<TbItem>> GetAllAsync(CancellationToken cancellationToken = default)
 			=> await _context.TbItems.ToListAsync(cancellationToken);
 
-	public async Task<List<VwItem>> GetAllItemsDataAsync(CancellationToken cancellationToken = default)
-		=> await _context.VwItems.ToListAsync(cancellationToken);
+	public async Task<List<VwItem>> GetAllItemsDataAsync(int? categoryId=default, int? itemTypeId=default ,CancellationToken cancellationToken = default)
+	{
+		#region if-else 
+
+		//if(categoryId == null || categoryId ==0)
+		//return await _context.VwItems.ToListAsync(cancellationToken);
+
+		//else
+		//	return await _context.VwItems.Where(i=>i.CategoryId==categoryId).ToListAsync(cancellationToken);
+
+		#endregion
+
+		return await _context.VwItems
+				.Where(i=>
+					(i.CategoryId==categoryId || categoryId == null || categoryId == 0)
+					&&
+					(i.ItemTypeId == itemTypeId || itemTypeId==null || itemTypeId==0)
+				)
+				.ToListAsync(cancellationToken);
+
+	}
 
 
 	public async Task<TbItem> GetAsync(int id, CancellationToken cancellationToken = default) 
