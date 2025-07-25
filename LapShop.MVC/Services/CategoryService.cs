@@ -1,4 +1,5 @@
-﻿using LapShop.MVC.Models;
+﻿using LapShop.MVC.Contracts;
+using LapShop.MVC.Models;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,13 @@ namespace LapShop.MVC.Services;
 public class CategoryService(AppDBContext context) : ICategoryService
 {
 	private readonly AppDBContext _context = context;
+
+
+	public async Task<List<CategoryResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default) =>
+			await _context.TbCategories
+					.ProjectToType<CategoryResponse>()
+					.ToListAsync(cancellationToken);
+
 
 	public async Task<List<TbCategory>> GetAllAsync(CancellationToken cancellationToken = default)
 			=> await _context.TbCategories.ToListAsync(cancellationToken);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 
 namespace LapShop.MVC.Models;
@@ -19,7 +20,7 @@ public partial class TbItem
 
     public DateTime CreatedDate { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string? CreatedBy { get; set; } = null!;
 
     public int CurrentState { get; set; }
 
@@ -33,11 +34,11 @@ public partial class TbItem
 
     public string? HardDisk { get; set; }
 
-    public int? ItemTypeId { get; set; }
+    public int ItemTypeId { get; set; }
 
     public string? Processor { get; set; }
 
-    public int? RamSize { get; set; }
+    public int RamSize { get; set; }
 
     public string? ScreenReslution { get; set; }
 
@@ -45,9 +46,10 @@ public partial class TbItem
 
     public string? Weight { get; set; }
 
-    public int? OsId { get; set; }
+    public int OsId { get; set; }
 
-    public virtual TbCategory Category { get; set; } = null!;
+
+    public virtual TbCategory? Category { get; set; } 
 
     public virtual TbItemType? ItemType { get; set; }
 

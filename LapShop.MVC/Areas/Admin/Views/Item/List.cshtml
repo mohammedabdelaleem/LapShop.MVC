@@ -45,7 +45,7 @@
 
                     <!-- New Item Button -->
                     <div class="mb-3">
-                        <a asp-controller="Item" asp-action="List" asp-area="@SharedData.AdminArea"
+                        <a asp-controller="Item" asp-action="Edit" asp-area="@SharedData.AdminArea"
                            class="btn btn-success">@ResGeneral.lblNew</a>
                     </div>
 
@@ -69,10 +69,10 @@
                                     <td>@item.ItemTypeName</td>
                                     <td>@item.SalesPrice</td>
                                     <td>
-                                        <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.CategoryId"
+                                        <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.ItemId"
                                            class="btn btn-info btn-sm">@ResGeneral.lblEdit</a>
 
-                                        <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.CategoryId"
+                                        <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.ItemId"
                                            class="btn btn-danger btn-sm"
                                            onclick="return confirm('Are you sure?');">@ResGeneral.lblDelete</a>
                                     </td>

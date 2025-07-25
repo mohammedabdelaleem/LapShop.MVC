@@ -1,9 +1,11 @@
-﻿using LapShop.MVC.Models;
+﻿using LapShop.MVC.Contracts;
+using LapShop.MVC.Models;
 
 namespace LapShop.MVC.Services;
 
 public interface ICategoryService
 {
+	Task<List<CategoryResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default);
 	Task<List<TbCategory>> GetAllAsync(CancellationToken cancellationToken = default);
 	Task<TbCategory> GetAsync(int id, CancellationToken cancellationToken = default);
 	Task AddAsync(TbCategory category, CancellationToken cancellationToken = default);

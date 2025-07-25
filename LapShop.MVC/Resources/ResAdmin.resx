@@ -120,6 +120,12 @@
   <data name="lblCategoryName" xml:space="preserve">
     <value>Category Name</value>
   </data>
+  <data name="lblGpu" xml:space="preserve">
+    <value>Gpu</value>
+  </data>
+  <data name="lblHardDisk" xml:space="preserve">
+    <value>HardDisk</value>
+  </data>
   <data name="lblImage" xml:space="preserve">
     <value>Image</value>
   </data>
@@ -129,13 +135,34 @@
   <data name="lblItemType" xml:space="preserve">
     <value>Item Type</value>
   </data>
+  <data name="lblOs" xml:space="preserve">
+    <value>Os</value>
+  </data>
   <data name="lblPrice" xml:space="preserve">
     <value>Price</value>
   </data>
   <data name="lblProcessor" xml:space="preserve">
     <value>Processor</value>
   </data>
+  <data name="lblPurchasePrice" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="lblRamSize" xml:space="preserve">
+    <value>Ram Size</value>
+  </data>
+  <data name="lblSalesPrice" xml:space="preserve">
+    <value>Sales Price</value>
+  </data>
+  <data name="lblScreenReslution" xml:space="preserve">
+    <value>Screen Reslution</value>
+  </data>
+  <data name="lblScreenSize" xml:space="preserve">
+    <value>Screen Size</value>
+  </data>
   <data name="lblShowHomePage" xml:space="preserve">
     <value>Show In Home Page</value>
+  </data>
+  <data name="lblWeight" xml:space="preserve">
+    <value>Weight</value>
   </data>
 </root>

@@ -18,12 +18,11 @@ public class ItemService(AppDBContext context) : IItemService
 						(categoryId == null || categoryId==0 || i.CategoryId == categoryId) &&
 						(itemTypeId == null || itemTypeId ==0 || i.ItemTypeId == itemTypeId))
 				.ToListAsync(cancellationToken);
-
 	}
 
 
-	public async Task<TbItem> GetAsync(int id, CancellationToken cancellationToken = default)
-		=> await _context.TbItems.SingleOrDefaultAsync(x => x.ItemId == id, cancellationToken)!;
+	public async Task<TbItem?> GetAsync(int id, CancellationToken cancellationToken = default)
+		=> await _context.TbItems.SingleOrDefaultAsync(x => x.ItemId == id, cancellationToken);
 
 	public async Task AddAsync(TbItem item, CancellationToken cancellationToken)
 	{
@@ -37,14 +36,14 @@ public class ItemService(AppDBContext context) : IItemService
 
 	public async Task<bool> UpdateAsync(int itemId, TbItem updateditem, CancellationToken cancellationToken)
 	{
-		if (itemId != updateditem.ItemId || updateditem == null)
+		if (updateditem == null || itemId != updateditem.ItemId )
 			return false;
 
 		var itemDB = await GetAsync(itemId, cancellationToken);
 
 		updateditem.Adapt(itemDB);
 
-		itemDB.UpdatedDate = DateTime.UtcNow;
+		itemDB!.UpdatedDate = DateTime.UtcNow;
 		itemDB.UpdatedBy = "1";
 		_context.Entry(itemDB).State = EntityState.Modified;
 
