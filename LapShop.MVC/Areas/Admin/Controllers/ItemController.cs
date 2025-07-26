@@ -66,6 +66,8 @@ public class ItemController(
 	}
 
 
+	[HttpPost]
+	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> Save(TbItem item, IFormFile? file, CancellationToken cancellationToken = default)
 	{
 
@@ -108,5 +110,12 @@ public class ItemController(
 
 		return RedirectToAction(nameof(List));
 
+	}
+
+
+	public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken = default)
+	{
+		var result = await _itemService.DeleteAsync(id, cancellationToken);
+		return RedirectToAction(nameof(List));
 	}
 }

@@ -12,14 +12,16 @@ public class CategoryService(AppDBContext context) : ICategoryService
 
 	public async Task<List<CategoryResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default) =>
 			await _context.TbCategories
+		.Where(x => x.CurrentState != 0)
 					.ProjectToType<CategoryResponse>()
 					.ToListAsync(cancellationToken);
 
 
 	public async Task<List<TbCategory>> GetAllAsync(CancellationToken cancellationToken = default)
-			=> await _context.TbCategories.ToListAsync(cancellationToken);
+			=> await _context.TbCategories.Where(x => x.CurrentState != 0).ToListAsync(cancellationToken);
 
-	public async Task<TbCategory> GetAsync(int id, CancellationToken cancellationToken = default) => await _context.TbCategories.SingleOrDefaultAsync(x => x.CategoryId == id, cancellationToken);
+	public async Task<TbCategory> GetAsync(int id, CancellationToken cancellationToken = default) 
+		=> await _context.TbCategories.SingleOrDefaultAsync(x => x.CategoryId == id && x.CurrentState !=0, cancellationToken);
 
 	public async Task AddAsync(TbCategory category, CancellationToken cancellationToken)
 	{
@@ -42,7 +44,7 @@ public class CategoryService(AppDBContext context) : ICategoryService
 
 		categoryDB.UpdatedDate = DateTime.UtcNow;
 		categoryDB.UpdatedBy = "1";
-		_context.Entry(categoryDB).State = EntityState.Modified;
+		//_context.Entry(categoryDB).State = EntityState.Modified;
 
 		if (categoryDB.ImageName == null)
 			categoryDB.ImageName = string.Empty;
@@ -53,7 +55,9 @@ public class CategoryService(AppDBContext context) : ICategoryService
 
 	public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
 	{
-		 _context.Remove(await GetAsync(id, cancellationToken));	
+		 var model = await GetAsync(id, cancellationToken);
+		 model.CurrentState = 0;
+
 		 await _context.SaveChangesAsync(cancellationToken);
 		return true;
 	}

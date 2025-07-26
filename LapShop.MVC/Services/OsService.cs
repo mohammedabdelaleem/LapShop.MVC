@@ -10,15 +10,16 @@ public class OsService(AppDBContext context) : IOsService
 
 	public async Task<List<OsResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default) =>
 			await _context.TbOs
+					.Where(x=>x.CurrentState !=0)
 					.ProjectToType<OsResponse>()
 					.ToListAsync(cancellationToken);
 
 
 	public async Task<List<TbO>> GetAllAsync(CancellationToken cancellationToken = default)
-			=> await _context.TbOs.ToListAsync(cancellationToken);
+			=> await _context.TbOs.Where(x => x.CurrentState != 0).ToListAsync(cancellationToken);
 
 	public async Task<TbO> GetAsync(int id, CancellationToken cancellationToken = default)
-			=> await _context.TbOs.SingleOrDefaultAsync(x => x.OsId == id, cancellationToken);
+			=> await _context.TbOs.SingleOrDefaultAsync(x => x.OsId == id && x.CurrentState != 0, cancellationToken);
 
 	public async Task AddAsync(TbO os, CancellationToken cancellationToken)
 	{
@@ -41,7 +42,7 @@ public class OsService(AppDBContext context) : IOsService
 
 		osDB.UpdatedDate = DateTime.UtcNow;
 		osDB.UpdatedBy = "1";
-		_context.Entry(osDB).State = EntityState.Modified;
+		//_context.Entry(osDB).State = EntityState.Modified;
 
 		if (osDB.ImageName == null)
 			osDB.ImageName = string.Empty;
@@ -52,7 +53,9 @@ public class OsService(AppDBContext context) : IOsService
 
 	public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
 	{
-		_context.Remove(await GetAsync(id, cancellationToken));
+		var model = await GetAsync(id, cancellationToken);
+		model.CurrentState = 0; 
+		
 		await _context.SaveChangesAsync(cancellationToken);
 		return true;
 	}
