@@ -6,6 +6,7 @@ public interface IItemService
 {
 	Task<List<TbItem>> GetAllAsync(CancellationToken cancellationToken = default);
 	Task<List<ItemResponse>> GetAllItemsDataAsync(int? categoryId = default, int? itemTypeId = default,int size=10, CancellationToken cancellationToken = default);
+	Task<List<ItemResponse>> GetRelatedItems(int itemId  ,int size = 10, CancellationToken cancellationToken = default);
 
 	Task<TbItem?> GetAsync(int id, CancellationToken cancellationToken = default);
 	Task<ItemResponse?> GetItemResponseAsync(int id, CancellationToken cancellationToken = default);

@@ -24,7 +24,20 @@ public class ItemService(AppDBContext context) : IItemService
 				.ToListAsync(cancellationToken);
 	}
 
+	public async Task<List<ItemResponse>> GetRelatedItems(int itemId, int size = 10, CancellationToken cancellationToken = default)
+	{
+		var item = await GetAsync(itemId, cancellationToken);
 
+		return await _context.VwItems
+			.Where(x=>
+						(x.SalesPrice < item!.SalesPrice-500 || x.SalesPrice < item.SalesPrice + 500) 
+						&& 
+						 x.CurrentState ==1		
+				  )
+			.ProjectToType<ItemResponse>()
+			.Take(size)
+			.ToListAsync(cancellationToken);
+	}
 	public async Task<ItemResponse?> GetItemResponseAsync(int id, CancellationToken cancellationToken = default)
 		=> await _context.VwItems
 		.Where(x => x.ItemId == id && x.CurrentState != 0)
@@ -82,4 +95,6 @@ public class ItemService(AppDBContext context) : IItemService
 					 item.ImageName : "x.png";
 
 	}
+
+
 }
