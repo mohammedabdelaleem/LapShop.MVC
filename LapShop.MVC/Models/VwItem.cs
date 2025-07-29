@@ -5,6 +5,7 @@ namespace LapShop.MVC.Models;
 
 public partial class VwItem
 {
+
     public string ItemName { get; set; } = null!;
 
     public decimal PurchasePrice { get; set; }

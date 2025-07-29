@@ -10,7 +10,7 @@ public class ItemService(AppDBContext context) : IItemService
 	public async Task<List<TbItem>> GetAllAsync(CancellationToken cancellationToken = default)
 			=> await _context.TbItems.Where(x => x.CurrentState != 0).ToListAsync(cancellationToken);
 
-	public async Task<List<VwItem>> GetAllItemsDataAsync(int? categoryId = default, int? itemTypeId = default, CancellationToken cancellationToken = default)
+	public async Task<List<ItemResponse>> GetAllItemsDataAsync(int? categoryId = default, int? itemTypeId = default,int size = 10,  CancellationToken cancellationToken = default)
 	{
 
 		return await _context.VwItems
@@ -19,6 +19,8 @@ public class ItemService(AppDBContext context) : IItemService
 						(i.ItemTypeId == itemTypeId || itemTypeId == null || itemTypeId ==0 )&&
 						 i.CurrentState == 1
 						)
+				.ProjectToType<ItemResponse>()
+				.Take(size)
 				.ToListAsync(cancellationToken);
 	}
 

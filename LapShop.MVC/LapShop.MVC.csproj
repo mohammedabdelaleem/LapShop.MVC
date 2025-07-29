@@ -41,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Frontend\" />
     <Folder Include="wwwroot\Uploads\Items\" />
   </ItemGroup>
 
