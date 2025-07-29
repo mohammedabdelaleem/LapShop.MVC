@@ -9,5 +9,7 @@ public class VmHomePage
 	public List<ItemResponse> FeautureItems { get; set; } = [];
 	public List<TbCategory> Categories { get; set; } = [];
 
+	public List<TbSlider> Sliders { get; set; } = [];
+	public TbSettings Settings { get; set; } = new();
 
 }

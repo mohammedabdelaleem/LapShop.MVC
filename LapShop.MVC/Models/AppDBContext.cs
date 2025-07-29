@@ -43,8 +43,9 @@ public partial class AppDBContext : DbContext
     public virtual DbSet<TbSalesInvoiceItem> TbSalesInvoiceItems { get; set; }
 
     public virtual DbSet<TbSlider> TbSliders { get; set; }
+	public virtual DbSet<TbSettings> Settings { get; set; }
 
-    public virtual DbSet<TbSupplier> TbSuppliers { get; set; }
+	public virtual DbSet<TbSupplier> TbSuppliers { get; set; }
 
     public virtual DbSet<VwItem> VwItems { get; set; }
 
