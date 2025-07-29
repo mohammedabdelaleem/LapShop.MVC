@@ -8,6 +8,7 @@ public interface IItemService
 	Task<List<ItemResponse>> GetAllItemsDataAsync(int? categoryId = default, int? itemTypeId = default,int size=10, CancellationToken cancellationToken = default);
 
 	Task<TbItem?> GetAsync(int id, CancellationToken cancellationToken = default);
+	Task<ItemResponse?> GetItemResponseAsync(int id, CancellationToken cancellationToken = default);
 	Task AddAsync(TbItem item, CancellationToken cancellationToken = default);
 	Task<bool> UpdateAsync(int itemId, TbItem item, CancellationToken cancellationToken);
 	Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default);

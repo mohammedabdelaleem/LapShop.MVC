@@ -25,8 +25,15 @@ public class ItemService(AppDBContext context) : IItemService
 	}
 
 
+	public async Task<ItemResponse?> GetItemResponseAsync(int id, CancellationToken cancellationToken = default)
+		=> await _context.VwItems
+		.Where(x => x.ItemId == id && x.CurrentState != 0)
+		.ProjectToType<ItemResponse>()
+		.FirstOrDefaultAsync(cancellationToken);
+
 	public async Task<TbItem?> GetAsync(int id, CancellationToken cancellationToken = default)
-		=> await _context.TbItems.SingleOrDefaultAsync(x => x.ItemId == id && x.CurrentState != 0, cancellationToken);
+		=> await _context.TbItems
+		.FirstOrDefaultAsync(x => x.ItemId == id && x.CurrentState != 0,cancellationToken);
 
 	public async Task AddAsync(TbItem item, CancellationToken cancellationToken)
 	{

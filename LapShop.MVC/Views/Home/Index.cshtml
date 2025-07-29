@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    int index = 1;
+   
 }
 
 <!-- Home slider -->
@@ -149,7 +149,7 @@
                 <div class="product-box col-xl-2 col-lg-3 col-sm-4 col-6">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="product-page(no-sidebar).html">
+                            <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId" >
                                 <img src="~/Uploads/Items/x.png"
                                 class="img-fluid blur-up lazyload bg-img" alt="">
                             </a>
@@ -176,7 +176,7 @@
                         <div class="rating">
                             <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                         </div>
-                        <a href="product-page(no-sidebar).html">
+                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId">
                             <h6>@item.ItemName</h6>
                         </a>
                         <h4>$@item.SalesPrice</h4>

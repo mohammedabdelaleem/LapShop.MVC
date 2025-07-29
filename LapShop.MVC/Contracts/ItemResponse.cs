@@ -3,6 +3,7 @@
 
 public record ItemResponse
     (
+		int ItemId,
 		string ItemName,
 		decimal PurchasePrice,
 		decimal SalesPrice,
@@ -12,5 +13,6 @@ public record ItemResponse
 		int? RamSize,
 		string CategoryName,
 	    string ItemTypeName,
-	    string OsName
+	    string OsName,
+		string? HardDisk
 	);

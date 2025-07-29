@@ -123,6 +123,9 @@
   <data name="lblDelete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="lblDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="lblEdit" xml:space="preserve">
     <value>Edit</value>
   </data>

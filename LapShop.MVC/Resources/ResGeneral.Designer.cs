@@ -79,6 +79,15 @@ namespace LapShop.MVC.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string lblDetails {
+            get {
+                return ResourceManager.GetString("lblDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string lblEdit {

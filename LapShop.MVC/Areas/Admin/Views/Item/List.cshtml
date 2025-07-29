@@ -73,6 +73,9 @@
                                     <td>@item.ItemTypeName</td>
                                     <td>@item.SalesPrice</td>
                                     <td>
+                                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId"
+                                           class="btn btn-primary btn-sm">@ResGeneral.lblDetails</a>
+
                                         <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.ItemId"
                                            class="btn btn-info btn-sm">@ResGeneral.lblEdit</a>
 
