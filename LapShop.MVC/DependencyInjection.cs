@@ -18,6 +18,8 @@ public static class DependencyInjection
 		services.AddScoped<IItemService, ItemService>();
 		services.AddScoped<IItemTypeService, ItemTypeService>();
 		services.AddScoped<IOsService, OsService>();
+		services.AddScoped<IItemImagesService, ItemImagesService>();
+
 
 
 
