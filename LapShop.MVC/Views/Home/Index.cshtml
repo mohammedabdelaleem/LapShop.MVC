@@ -147,42 +147,8 @@
             @foreach (var item in Model.AllItems)
             {
                 <div class="product-box col-xl-2 col-lg-3 col-sm-4 col-6">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId" >
-                                <img src="~/Uploads/Items/x.png"
-                                class="img-fluid blur-up lazyload bg-img" alt="">
-                            </a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <a href="javascript:void(0)" title="Add to Wishlist" tabindex="0">
-                                <i class="ti-heart"
-                                aria-hidden="true"></i>
-                            </a>
-                            <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View" tabindex="0">
-                                <i class="ti-search" aria-hidden="true"></i>
-                            </a>
-                            <a href="compare.html" title="Compare" tabindex="0">
-                                <i class="ti-reload"
-                                aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="add-button" data-toggle="modal" data-target="#addtocart">
-                            add to
-                            cart
-                        </div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating">
-                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                        </div>
-                        <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId">
-                            <h6>@item.ItemName</h6>
-                        </a>
-                        <h4>$@item.SalesPrice</h4>
-                    </div>
+                <partial name="_ItemBox" model="@item" />
                 </div>
-
             }
 
 
@@ -219,8 +185,6 @@
                         <div>
                             @foreach (var item in Model.FreeDelivery)
                             {
-
-
                                 <div class="media">
                                     <a href="product-page(no-sidebar).html">
                                         <img class="img-fluid blur-up lazyload"
@@ -266,43 +230,10 @@
 
                                 @foreach (var item in Model.RecommendedItems)
                                 {
-                                    <div class="product-box">
-                                        <div class="img-wrapper">
-                                            <div class="front">
-                                                <a href="product-page(no-sidebar).html">
-                                                    <img src="~/Uploads/Items/x.png"
-                                                    class="img-fluid blur-up lazyload bg-img" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="cart-info cart-wrap">
-                                                <a href="javascript:void(0)" title="Add to Wishlist" tabindex="0">
-                                                    <i class="ti-heart" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view"
-                                                title="Quick View" tabindex="0">
-                                                    <i class="ti-search"
-                                                    aria-hidden="true"></i>
-                                                </a>
-                                                <a href="compare.html" title="Compare" tabindex="0">
-                                                    <i class="ti-reload"
-                                                    aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div class="add-button" data-toggle="modal" data-target="#addtocart">
-                                                add to
-                                                cart
-                                            </div>
-                                        </div>
-                                        <div class="product-detail">
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                            <a href="product-page(no-sidebar).html">
-                                                <h6>@item.ItemName</h6>
-                                            </a>
-                                            <h4>$@item.SalesPrice</h4>
-                                        </div>
-                                    </div>
+
+                                    <partial name="_ItemBox" model="@item" />
+
+        
                                 }
 
 
@@ -313,44 +244,7 @@
                             <div class="product-4 game-product product-m no-arrow">
                                 @foreach (var item in Model.FeautureItems)
                                 {
-                                    <div class="product-box">
-                                        <div class="img-wrapper">
-                                            <div class="front">
-                                                <a href="product-page(no-sidebar).html">
-                                                    <img src="~/Uploads/Items/x.png"
-                                                         class="img-fluid blur-up lazyload bg-img" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="cart-info cart-wrap">
-                                                <a href="javascript:void(0)" title="Add to Wishlist" tabindex="0">
-                                                    <i class="ti-heart" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view"
-                                                   title="Quick View" tabindex="0">
-                                                    <i class="ti-search"
-                                                       aria-hidden="true"></i>
-                                                </a>
-                                                <a href="compare.html" title="Compare" tabindex="0">
-                                                    <i class="ti-reload"
-                                                       aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div class="add-button" data-toggle="modal" data-target="#addtocart">
-                                                add to
-                                                cart
-                                            </div>
-                                        </div>
-                                        <div class="product-detail">
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                            <a href="product-page(no-sidebar).html">
-                                                <h6>@item.ItemName</h6>
-                                            </a>
-                                            <h4>$@item.SalesPrice</h4>
-                                        </div>
-                                    </div>
-
+                                    <partial name="_ItemBox" model="@item" />
                                 }
 
                
@@ -433,98 +327,3 @@
         </div>
     </section>
 </div>
-<!-- service layout  end -->
-<!-- instagram section -->
-<section class="instagram ratio_square">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 p-0">
-                <h2 class="title-borderless"># instagram</h2>
-                <div class="slide-7 no-arrow slick-instagram">
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/2.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/3.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/4.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/9.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/6.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/7.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/8.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/9.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box">
-                                <img src="~/Frontend/images/slider/2.jpg" class="bg-img"
-                                     alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- instagram section end -->
