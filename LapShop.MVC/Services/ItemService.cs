@@ -30,7 +30,7 @@ public class ItemService(AppDBContext context) : IItemService
 
 		return await _context.VwItems
 			.Where(x=>
-						(x.SalesPrice < item!.SalesPrice-500 || x.SalesPrice < item.SalesPrice + 500) 
+						(x.SalesPrice >= item!.SalesPrice-100 && x.SalesPrice <= item.SalesPrice + 100) 
 						&& 
 						 x.CurrentState ==1		
 				  )

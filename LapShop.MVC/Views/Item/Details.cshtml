@@ -21,6 +21,7 @@
 	</div>
 </div>
 <!-- breadcrumb End -->
+
 <!-- section start -->
 <section>
 	<div class="collection-wrapper">
@@ -162,6 +163,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
 </section>
 <!-- Section ends -->
 <!-- product-tab starts -->
@@ -252,10 +255,11 @@
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-						<div class="mt-4 text-center">
-							<iframe width="560" height="315" src="~/Uploads/Video/passion.mp4"
-									allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					<div class="tab-pane fade h-25" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+						<div class="mt-4 w-50 ">
+							<video class=" w-50 " controls>
+								<source src="/Uploads/Video/passion.mp4" type="video/mp4">
+							</video>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
@@ -315,8 +319,9 @@
 			 @foreach(var item in Model.RelatedItems)
  {
 				<div class="col-xl-2 col-md-4 col-sm-6">
-			<partial name="_ItemBox" model="@item" />
-			</div>
+	
+						<partial name="_ItemBox" model="@item" />
+				</div>
  }
 
 			
