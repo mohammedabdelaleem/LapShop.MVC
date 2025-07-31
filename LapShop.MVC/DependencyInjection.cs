@@ -11,7 +11,10 @@ public static class DependencyInjection
 
 		services.AddControllersWithViews();
 
-		services.AddDatabaseConfig(configuration);
+		services
+			.AddSessionConfig()
+			.AddDatabaseConfig(configuration);
+
 
 		services.AddScoped<ICategoryService , CategoryService>();
 		services.AddScoped<IFileService, FileService>();
@@ -19,9 +22,6 @@ public static class DependencyInjection
 		services.AddScoped<IItemTypeService, ItemTypeService>();
 		services.AddScoped<IOsService, OsService>();
 		services.AddScoped<IItemImagesService, ItemImagesService>();
-
-
-
 
 
 		return services;
@@ -41,4 +41,15 @@ public static class DependencyInjection
 
 		return services;
 	}
+
+	private static IServiceCollection AddSessionConfig(this IServiceCollection services)
+	{
+		services.AddSession();
+		services.AddHttpContextAccessor();
+		services.AddDistributedMemoryCache(); // if any error happend at client , caching the session info at server not client
+
+		return services;
+	}
+
+
 }
