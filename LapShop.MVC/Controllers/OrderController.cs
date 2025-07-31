@@ -6,13 +6,30 @@ namespace LapShop.MVC.Controllers;
 public class OrderController(IItemService itemService) : Controller
 {
 	private readonly IItemService _itemService = itemService;
-	private readonly string _sessionKey = "Cart";
+	private readonly string _stateManagementKey = "Cart";
+
+	// session when you need to save the data during the session with the user opening the system [server side]
+	// cookies when you need to save data for a long time, around [10-15] days [client side]
+	// DB for Persistent Storing 
+
+	// No Login : saved At Cookies
+	// Login : get data from Db And Store it into cookies 
+
+	// mustn't store sensitive data at cookies 
 
 	public IActionResult Cart()
 	{
-		var sessionCart = HttpContext.Session.GetString(_sessionKey) ?? string.Empty;
+		var cart = HttpContext.Request.Cookies[_stateManagementKey] ?? string.Empty;
+		ShoppingCart shoppingCart;
 
-		var shoppingCart = JsonConvert.DeserializeObject<ShoppingCart>(sessionCart);
+		if (cart == string.Empty)
+		{
+			shoppingCart = new ShoppingCart();
+		}
+		else
+		{
+			shoppingCart = JsonConvert.DeserializeObject<ShoppingCart>(cart);
+		}
 
 		return View(nameof(Cart), shoppingCart);
 	}
@@ -23,19 +40,16 @@ public class OrderController(IItemService itemService) : Controller
 		var item = await _itemService.GetAsync(itemId, cancellationToken);
 
 		ShoppingCart cart;
-		if(HttpContext.Session.GetString(_sessionKey) == null)
+		if(HttpContext.Request.Cookies[_stateManagementKey] == null)
 		{
 			cart = new ShoppingCart();
 		}else
 		{
-			cart = JsonConvert.DeserializeObject<ShoppingCart>(HttpContext.Session.GetString(_sessionKey));
+			cart = JsonConvert.DeserializeObject<ShoppingCart>(HttpContext.Request.Cookies[_stateManagementKey]);
 		}
 
-		if(cart.Items.Any(x=>x.ItemId == itemId))
+		if(cart.Items.FirstOrDefault(x => x.ItemId == itemId) is { } cartItem )
 		{
-			var cartItem =
-			cart.Items
-				.FirstOrDefault((x => x.ItemId == itemId))!;
 
 			cartItem.Quantity ++;
 			cartItem.Total = cartItem.Price * cartItem.Quantity;
@@ -56,10 +70,14 @@ public class OrderController(IItemService itemService) : Controller
 
 
 		cart.Total = cart.Items.Sum(x => x.Total);
-		HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
+		HttpContext.Response.Cookies.Append(_stateManagementKey, JsonConvert.SerializeObject(cart),
+			new CookieOptions
+		{
+			Expires = DateTimeOffset.Now.AddDays(7), 
+			HttpOnly = true, // optional for added security
+			Secure = true // optional if you use HTTPS
+		});
 
 		return RedirectToAction(nameof(Cart));
 	}
-
-
 }
