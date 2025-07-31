@@ -1,6 +1,5 @@
 ﻿@model ShoppingCart
 
-
 <!-- breadcrumb start -->
 <div class="breadcrumb-section">
     <div class="container">
@@ -22,7 +21,6 @@
     </div>
 </div>
 <!-- breadcrumb End -->
-
 <!--section start-->
 <section class="cart-section section-b-space">
     <div class="container">
@@ -40,25 +38,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var item in Model.Items)
+                        @foreach (var item in Model.Items)
                         {
                             <tr>
                                 <td>
-                                    <a href="#"><img src="~/Uploads/Items/019847ae-ee54-7d2b-bb80-155cc3f52726.jpeg" alt="@item.IamgeName"></a>
+                                    <a href="#"><img src="~/Uploads/Items/@item.IamgeName" alt="@item.ItemName"></a>
                                 </td>
                                 <td>
-                                    <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId" >@item.ItemName</a>
+                                    <a asp-controller="Item" asp-action="Details" asp-route-id="@item.ItemId">@item.ItemName</a>
                                     <div class="mobile-cart-content row">
                                         <div class="col-xs-3">
                                             <div class="qty-box">
                                                 <div class="input-group">
                                                     <input type="text" name="quantity" class="form-control input-number"
-                                                           value="@item.Quantity">
+                                                           value="@item.Quantity" min="0">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
-                                            <h2 class="td-color">$63.00</h2>
+                                            <h2 class="td-color">$@item.Price</h2>
                                         </div>
                                         <div class="col-xs-3">
                                             <h2 class="td-color">
@@ -73,31 +71,40 @@
                                 <td>
                                     <div class="qty-box">
                                         <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number"
-                                                   value="@item.Quantity">
+                                            <input type="number"
+                                                   class="form-control input-number quantity-input"
+                                                   data-id="@item.ItemId"
+                                                   data-price="@item.Price"
+                                                   onkeyup="ChangeQuantity(this)"
+                                                   onchange="ChangeQuantity(this)"
+                                                   value="@item.Quantity" min="0">
                                         </div>
                                     </div>
                                 </td>
                                 <td><a href="#" class="icon"><i class="ti-close"></i></a></td>
                                 <td>
-                                    <h2 class="td-color">$@item.Total</h2>
+                                    <h2 data-id="@item.ItemId" class="td-color total-cart-item">
+                                        $@item.Total.ToString("0.00")   
+                                    </h2>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
+
                 <table class="table cart-table table-responsive-md">
                     <tfoot>
                         <tr>
                             <td>total price :</td>
                             <td>
-                                <h2>$@Model.Total</h2>
+                                <h2 id="grand-total">$@Model.Total.ToString("0.00")</h2>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
+
         <div class="row cart-buttons">
             <div class="col-6"><a href="#" class="btn btn-solid">continue shopping</a></div>
             <div class="col-6"><a href="#" class="btn btn-solid">check out</a></div>
@@ -105,3 +112,47 @@
     </div>
 </section>
 <!--section end-->
+@section scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function ChangeQuantity(input) {
+           
+            let id = $(input).data("id");
+            let price = parseFloat($(input).data("price"));
+            let quantity = parseInt($(input).val());
+
+
+            if (isNaN(quantity) || quantity < 0) {
+                quantity = 0;
+                $(input).val(quantity);
+            }
+
+            // Update item total
+            $(".total-cart-item").each(function () {
+                if ($(this).data("id") === id) {
+                    const newTotal = (price * quantity).toFixed(2);
+                    $(this).html(`$${newTotal}`);
+                    //It updates the content inside the current HTML element with the new value.
+                    // also in this case you could use .text() ==> you just add a dollar sign
+                    // .html() ==> Renders HTML Tags
+                    // .text() ==> When inserting plain text
+                }
+            });
+
+
+            // Update grand total
+            let newCartTotal = 0;
+            $(".total-cart-item").each(function () {
+                let value = parseFloat($(this).text().replace("$", ""));
+                newCartTotal += value;
+            });
+
+            $("#grand-total").text(`$${newCartTotal.toFixed(2)}`);
+
+
+            // TODO: Ajax Call To Update The Model At Server Side
+        }
+    </script>
+}
