@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -83,6 +84,12 @@ public class OrderController(IItemService itemService) : Controller
 
 
 	public IActionResult MyOrders()
+	{
+		return View();
+	}
+
+	[Authorize]
+	public IActionResult OrderSuccess()
 	{
 		return View();
 	}

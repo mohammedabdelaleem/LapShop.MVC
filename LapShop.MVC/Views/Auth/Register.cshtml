@@ -32,6 +32,8 @@
                         class="theme-form">
                         <div asp-validation-summary="All" class="text-danger"></div>
 
+                        <input name="returnUrl" value="@ViewBag.ReturnUrl" hidden />
+
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label asp-for="FirstName" ></label>

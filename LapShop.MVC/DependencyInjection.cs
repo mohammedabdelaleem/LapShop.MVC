@@ -1,4 +1,5 @@
 ﻿using LapShop.MVC.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace LapShop.MVC;
 
@@ -13,10 +14,23 @@ public static class DependencyInjection
 			.AddSessionConfig()
 			.AddDatabaseConfig(configuration);
 
-
 		services.AddIdentity<ApplicationUser, ApplicationRole>()
-				.AddEntityFrameworkStores<AppDBContext>();
+				.AddEntityFrameworkStores<AppDBContext>()
+					.AddDefaultTokenProviders(); // optional but common;
 
+		services.ConfigureApplicationCookie(option =>
+		{
+			option.LoginPath = "/Auth/Register";
+			option.AccessDeniedPath = "/Auth/AccessDenied";
+			option.Cookie.Name = "Cookie";
+			option.Cookie.HttpOnly = true;
+			option.ExpireTimeSpan = TimeSpan.FromMinutes(800);
+			option.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+			option.SlidingExpiration = true;
+		});
+
+
+		
 
 		services.AddScoped<ICategoryService , CategoryService>();
 		services.AddScoped<IFileService, FileService>();

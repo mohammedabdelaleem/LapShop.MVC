@@ -10,26 +10,25 @@ public class AuthController
 	private readonly UserManager<ApplicationUser> _userManager = userManager;
 	private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
 
-	public IActionResult Register()
+	public IActionResult Register(string returnUrl)
 	{
+		ViewBag.ReturnUrl = returnUrl;
 		return View(new RegisterRequest("", "", "",""));
 	}
 
 
 	[HttpPost]
-	[ValidateAntiForgeryToken]	
-	public async Task<IActionResult> Register(RegisterRequest request, CancellationToken cancellationToken=default)
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> Register(RegisterRequest request, string returnUrl = null, CancellationToken cancellationToken = default)
 	{
-		if(!ModelState.IsValid) 
+		if (!ModelState.IsValid)
 			return View(nameof(Register), request);
 
-
-		if(await _userManager.Users.AnyAsync(x=>x.Email == request.Email, cancellationToken))
-			{
+		if (await _userManager.Users.AnyAsync(x => x.Email == request.Email, cancellationToken))
+		{
 			ModelState.AddModelError("Email.Duplicate", "This Email Is Found");
-				return View(nameof(Register), request);
+			return View(nameof(Register), request);
 		}
-
 
 		var user = new ApplicationUser()
 		{
@@ -38,45 +37,38 @@ public class AuthController
 			Email = request.Email,
 			UserName = request.Email,
 		};
-		
+
 		var result = await _userManager.CreateAsync(user, request.Password);
 
 		if (result.Succeeded)
 		{
-			var loginResult =  await _signInManager.PasswordSignInAsync(user, request.Password, true, true);
+			await _signInManager.SignInAsync(user, isPersistent: true);
 
-			if (loginResult.Succeeded)
-			{
-				return Redirect("/Home/Index");
-				//return RedirectToAction("/Home/Index"); // not calid 
-			}
-			else
-			{
-				// 
-			}
+			if (!string.IsNullOrEmpty(returnUrl))
+				return Redirect(returnUrl);
 
+			return RedirectToAction("Index", "Home");
 		}
-		else
+
+		foreach (var error in result.Errors)
 		{
-			foreach (var error in result.Errors)
-			{
-				ModelState.AddModelError("", error.Description);
-			}
+			ModelState.AddModelError("", error.Description);
 		}
 
-		return View();
-		
+		return View(request);
 	}
 
 
-	public IActionResult Login()
+
+	public IActionResult Login(string returnUrl)
 	{
+		ViewBag.ReturnUrl = returnUrl;
 		return View(new LoginRequest("",""));
 	}
 
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Login(LoginRequest request, CancellationToken cancellationToken=default)
+	public async Task<IActionResult> Login(LoginRequest request, string returnUrl, CancellationToken cancellationToken=default)
 	{
 		if (!ModelState.IsValid)
 			return View(request);
@@ -91,21 +83,33 @@ public class AuthController
 
 		if (loginResult.Succeeded)
 		{
-			return Redirect("~/");
-			//return RedirectToAction("/Home/Index"); // not calid 
+			if(string.IsNullOrEmpty(returnUrl))
+			{
+				return Redirect("~/");
+			}else
+			{
+				return Redirect(returnUrl);
+			}
 		}
 
 		return View();
 	}
+
+
 	public async Task<IActionResult> Logout()
 	{
 		await _signInManager.SignOutAsync();
 		return Redirect("~/");
 	}
 
-
+	public IActionResult AccessDenied()
+	{
+			return View();
+	}
 
 	
+
+
 
 
 }
