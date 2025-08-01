@@ -80,4 +80,10 @@ public class OrderController(IItemService itemService) : Controller
 
 		return RedirectToAction(nameof(Cart));
 	}
+
+
+	public IActionResult MyOrders()
+	{
+		return View();
+	}
 }

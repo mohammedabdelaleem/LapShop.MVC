@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> _signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LapShop.MVC</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,7 +17,7 @@
     <link rel="shortcut icon" href="~/Frontend/images/favicon/1.png" type="image/x-icon">
     <title>Multikart - Multi-purpopse E-commerce Html Template</title>
 
-     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LapShop.MVC.styles.css" asp-append-version="true" />
 
@@ -90,7 +92,7 @@
                                 <div class="brand-logo">
                                     <a href="index.html">
                                         <img src="~/Frontend/images/icon/logo/18.png"
-                                             class="img-fluid blur-up lazyload" alt="">
+                                        class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -102,7 +104,7 @@
                                             <li>
                                                 <div class="mobile-back text-right">
                                                     Back<i class="fa fa-angle-right pl-2"
-                                                           aria-hidden="true"></i>
+                                                    aria-hidden="true"></i>
                                                 </div>
                                             </li>
                                             <li>
@@ -135,20 +137,20 @@
                                             <li class="onhover-div mobile-search">
                                                 <div>
                                                     <img src="~/Frontend/images/icon/search.png" onclick="openSearch()"
-                                                         class="img-fluid blur-up lazyload" alt=""> <i class="ti-search"
-                                                                                                       onclick="openSearch()"></i>
+                                                    class="img-fluid blur-up lazyload" alt=""> <i class="ti-search"
+                                                    onclick="openSearch()"></i>
                                                 </div>
                                             </li>
                                             <li class="onhover-div mobile-setting">
                                                 <div>
                                                     <img src="~/Frontend/images/icon/setting.png"
-                                                         class="img-fluid blur-up lazyload" alt=""> <i class="ti-settings"></i>
+                                                    class="img-fluid blur-up lazyload" alt=""> <i class="ti-settings"></i>
                                                 </div>
                                             </li>
                                             <li class="onhover-div mobile-cart">
                                                 <div>
                                                     <img src="~/Frontend/images/icon/cart.png"
-                                                         class="img-fluid blur-up lazyload" alt=""> <i class="ti-shopping-cart"></i>
+                                                    class="img-fluid blur-up lazyload" alt=""> <i class="ti-shopping-cart"></i>
                                                 </div>
                                             </li>
                                         </ul>
@@ -348,8 +350,15 @@
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 My Account
                                 <ul class="onhover-show-div">
-                                    <li><a href="#" data-lng="en">Login</a></li>
-                                    <li><a href="#" data-lng="es">Logout</a></li>
+                                    @if(_signInManager.IsSignedIn(User))
+                                    {
+                                        <li><a asp-controller="Auth" asp-action="Logout" data-lng="es">Logout</a></li>
+                                        <li><a asp-controller="Order" asp-action="MyOrders" data-lng="es">My Orders</a></li>
+
+                                    }else
+                                    {
+                                    <li><a asp-controller="Auth" asp-action="Login" data-lng="en">Login</a></li>
+                                    }
                                 </ul>
                             </li>
                         </ul>

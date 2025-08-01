@@ -1,3 +1,5 @@
+using LapShop.MVC.Abstractions.Consts;
+
 namespace LapShop.MVC.Area.Admin.Controllers
 {
 	[Area(SharedData.AdminArea)]

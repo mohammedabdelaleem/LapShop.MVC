@@ -1,4 +1,4 @@
-﻿namespace LapShop.MVC.Consts;
+﻿namespace LapShop.MVC.Abstractions.Consts;
 
 public static class SharedData
 {

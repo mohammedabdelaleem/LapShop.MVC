@@ -1,4 +1,6 @@
-﻿namespace LapShop.MVC.Areas.Admin.Controllers;
+﻿using LapShop.MVC.Abstractions.Consts;
+
+namespace LapShop.MVC.Areas.Admin.Controllers;
 
 [Area(SharedData.AdminArea)]
 public class CategoryController(

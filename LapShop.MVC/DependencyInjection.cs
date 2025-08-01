@@ -1,6 +1,4 @@
 ﻿using LapShop.MVC.Models;
-using LapShop.MVC.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.MVC;
 
@@ -14,6 +12,10 @@ public static class DependencyInjection
 		services
 			.AddSessionConfig()
 			.AddDatabaseConfig(configuration);
+
+
+		services.AddIdentity<ApplicationUser, ApplicationRole>()
+				.AddEntityFrameworkStores<AppDBContext>();
 
 
 		services.AddScoped<ICategoryService , CategoryService>();

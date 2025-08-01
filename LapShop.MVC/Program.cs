@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDependencies(builder.Configuration);
 
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -15,7 +16,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseAuthorization();
+
+app.UseAuthentication();
+app.UseAuthorization();	
+
 app.UseSession();
 
 app.MapStaticAssets();

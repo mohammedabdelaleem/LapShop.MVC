@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection;
 
 namespace LapShop.MVC.Models;
 
-public partial class AppDBContext : DbContext
+public partial class AppDBContext : IdentityDbContext<ApplicationUser>
 {
     public AppDBContext()
     {
@@ -60,10 +59,24 @@ public partial class AppDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
        
+        base.OnModelCreating(modelBuilder);
+		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+
+		// change on delete behaviour
+		var cascadeFKs = modelBuilder.Model
+			.GetEntityTypes().SelectMany(e => e.GetForeignKeys())
+			.Where(fk => fk.DeleteBehavior == DeleteBehavior.Cascade && !fk.IsOwnership);
+
+		foreach (var relationship in cascadeFKs)
+		{
+			relationship.DeleteBehavior = DeleteBehavior.Restrict;
+		}
+
+		modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
+    
         modelBuilder.Entity<TbBusinessInfo>(entity =>
         {
             entity.HasKey(e => e.BusinessInfoId);
