@@ -3,7 +3,7 @@
 global using Microsoft.EntityFrameworkCore;
 global using LapShop.MVC;
 global using Mapster;
-
+global using Microsoft.AspNetCore.Authorization;
 global using LapShop.MVC.Models;
 global using LapShop.MVC.ViewModels;
 global using LapShop.MVC.Services;

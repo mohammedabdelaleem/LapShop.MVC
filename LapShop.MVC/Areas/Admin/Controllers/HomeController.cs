@@ -1,8 +1,8 @@
-using LapShop.MVC.Abstractions.Consts;
-
 namespace LapShop.MVC.Area.Admin.Controllers
 {
-	[Area(SharedData.AdminArea)]
+
+	[Area(DefaultRoles.Admin)]
+	[Authorize(Roles = DefaultRoles.Admin)]
 	public class HomeController : Controller
     {
    

@@ -1,16 +1,15 @@
-﻿using LapShop.MVC.Contracts.Auth;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿namespace LapShop.MVC.Controllers;
 
-namespace LapShop.MVC.Controllers;
 public class AuthController
 	(UserManager<ApplicationUser> userManager,
-	SignInManager<ApplicationUser> signInManager): Controller
+	SignInManager<ApplicationUser> signInManager, 
+	RoleManager<ApplicationRole> roleManager): Controller
 {
 	private readonly UserManager<ApplicationUser> _userManager = userManager;
 	private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
+	private readonly RoleManager<ApplicationRole> _roleManager = roleManager;
 
-	public IActionResult Register(string returnUrl)
+	public IActionResult Register(string returnUrl=null)
 	{
 		ViewBag.ReturnUrl = returnUrl;
 		return View(new RegisterRequest("", "", "",""));
@@ -42,8 +41,23 @@ public class AuthController
 
 		if (result.Succeeded)
 		{
+			// auto login 
 			await _signInManager.SignInAsync(user, isPersistent: true);
 
+			// add to role 
+			if (!await _roleManager.RoleExistsAsync(DefaultRoles.Member))
+			{
+				await _roleManager.CreateAsync(new ApplicationRole { Name = DefaultRoles.Member});
+			}
+
+			var roleResult = await _userManager.AddToRoleAsync(user, DefaultRoles.Member);
+			if (!roleResult.Succeeded)
+			{
+				foreach (var error in roleResult.Errors)
+					ModelState.AddModelError("", error.Description);
+			}
+
+			// redirect to the place where you came form
 			if (!string.IsNullOrEmpty(returnUrl))
 				return Redirect(returnUrl);
 
@@ -60,7 +74,7 @@ public class AuthController
 
 
 
-	public IActionResult Login(string returnUrl)
+	public IActionResult Login(string returnUrl=null)
 	{
 		ViewBag.ReturnUrl = returnUrl;
 		return View(new LoginRequest("",""));
@@ -68,31 +82,26 @@ public class AuthController
 
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Login(LoginRequest request, string returnUrl, CancellationToken cancellationToken=default)
+	public async Task<IActionResult> Login(LoginRequest request, string returnUrl=null, CancellationToken cancellationToken=default)
 	{
 		if (!ModelState.IsValid)
 			return View(request);
 
-		var user = new ApplicationUser()
+		if(await _userManager.FindByEmailAsync(request.Email) is not { } user)
 		{
-			Email = request.Email,
-			UserName = request.Email,
-		};
+			ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+			return View(request);
+		}
 
-		var loginResult = await _signInManager.PasswordSignInAsync(user.Email, request.Password, true, true);
+		var loginResult = await _signInManager.PasswordSignInAsync(user.UserName!, request.Password, true, true);
 
 		if (loginResult.Succeeded)
 		{
-			if(string.IsNullOrEmpty(returnUrl))
-			{
-				return Redirect("~/");
-			}else
-			{
-				return Redirect(returnUrl);
-			}
+			return string.IsNullOrEmpty(returnUrl) ? Redirect("~/") : Redirect(returnUrl);
 		}
 
-		return View();
+		ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+		return View(request);
 	}
 
 
