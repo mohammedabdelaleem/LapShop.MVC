@@ -18,6 +18,7 @@ public class OrderController(IItemService itemService) : Controller
 
 	// mustn't store sensitive data at cookies 
 
+
 	public IActionResult Cart()
 	{
 		var cart = HttpContext.Request.Cookies[_stateManagementKey] ?? string.Empty;
@@ -87,6 +88,7 @@ public class OrderController(IItemService itemService) : Controller
 	{
 		return View();
 	}
+
 
 	[Authorize]
 	public IActionResult OrderSuccess()

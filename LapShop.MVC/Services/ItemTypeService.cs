@@ -1,4 +1,5 @@
 ﻿using LapShop.MVC.Contracts;
+using LapShop.MVC.Persistance;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 

@@ -12,3 +12,6 @@ global using LapShop.MVC.Contracts;
 global using LapShop.MVC.Resources;
 global using System.ComponentModel.DataAnnotations;
 global using LapShop.MVC.Contracts.Auth;
+
+global using LapShop.MVC.Abstractions.Consts;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

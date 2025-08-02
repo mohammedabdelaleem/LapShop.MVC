@@ -1,4 +1,4 @@
-﻿using LapShop.MVC.Models;
+﻿using LapShop.MVC.Persistance;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace LapShop.MVC;

@@ -1,4 +1,5 @@
 ﻿
+using LapShop.MVC.Persistance;
 using Microsoft.EntityFrameworkCore;
 
 namespace LapShop.MVC.Services;

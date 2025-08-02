@@ -1,5 +1,5 @@
 ﻿using LapShop.MVC.Contracts;
-using LapShop.MVC.Models;
+using LapShop.MVC.Persistance;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 

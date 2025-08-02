@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Reflection;
 
-namespace LapShop.MVC.Models;
+namespace LapShop.MVC.Persistance;
 
 public partial class AppDBContext : IdentityDbContext<ApplicationUser>
 {
