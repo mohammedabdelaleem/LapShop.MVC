@@ -20,7 +20,7 @@ public static class DependencyInjection
 
 		services.ConfigureApplicationCookie(option =>
 		{
-			option.LoginPath = "/Auth/Register";
+			option.LoginPath = "/Auth/Login";
 			option.AccessDeniedPath = "/Auth/AccessDenied";
 			option.Cookie.Name = "Cookie";
 			option.Cookie.HttpOnly = true;

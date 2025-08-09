@@ -19,14 +19,14 @@ public class ItemController(
 
 	public async Task<IActionResult> List(CancellationToken cancellationToken = default)
 	{
-		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken); ;
+		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken);
 		ViewBag.ItemTypes = await _itemTypeService.GetAllInShortAsync(cancellationToken);
 
 		// Save selected values to ViewData or ViewBag
 		ViewBag.SelectedCategoryId = null;
 		ViewBag.SelectedItemTypeId = null;
 
-		var result = await _itemService.GetAllItemsDataAsync(cancellationToken: cancellationToken);
+		var result = await _itemService.GetAllItemsDataAsync(size: 100, cancellationToken: cancellationToken);
 		return View(result);
 	}
 

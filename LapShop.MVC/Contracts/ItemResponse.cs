@@ -14,5 +14,7 @@ public record ItemResponse
 		string CategoryName,
 	    string ItemTypeName,
 	    string OsName,
-		string? HardDisk
+		string? HardDisk,
+		DateTime CreatedDate
+
 	);

@@ -22,6 +22,7 @@ public class ItemService(AppDBContext context) : IItemService
 						)
 				.ProjectToType<ItemResponse>()
 				.Take(size)
+				.OrderByDescending(x=>x.CreatedDate)
 				.ToListAsync(cancellationToken);
 	}
 
