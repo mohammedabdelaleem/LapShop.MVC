@@ -15,7 +15,7 @@ public partial class TbSalesInvoice
 
     public string? Notes { get; set; }
 
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
     public string CreatedBy { get; set; } = null!;
 

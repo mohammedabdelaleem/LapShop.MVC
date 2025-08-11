@@ -19,5 +19,5 @@ public partial class VwSalesInvoice
 
     public string? Notes { get; set; }
 
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
 }

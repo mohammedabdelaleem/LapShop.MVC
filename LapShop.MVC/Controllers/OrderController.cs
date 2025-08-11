@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
-
+﻿
 namespace LapShop.MVC.Controllers;
-public class OrderController(IItemService itemService) : Controller
+public class OrderController(
+	IItemService itemService,
+	ISalesInvoiceService salesInvoiceService) : Controller
 {
 	private readonly IItemService _itemService = itemService;
+	private readonly ISalesInvoiceService _salesInvoiceService = salesInvoiceService;
 	private readonly string _stateManagementKey = "Cart";
 
 	// session when you need to save the data during the session with the user opening the system [server side]
@@ -89,8 +90,52 @@ public class OrderController(IItemService itemService) : Controller
 
 
 	[Authorize]
-	public IActionResult OrderSuccess()
+	public async Task<IActionResult> OrderSuccess()
 	{
+		string sessionCart = string.Empty;
+		if (HttpContext.Request.Cookies[_stateManagementKey] != null)
+		{
+			sessionCart = HttpContext.Request.Cookies[_stateManagementKey]!;
+		}
+
+		var cart = JsonConvert.DeserializeObject<ShoppingCart>(sessionCart);
+		await SaveOrder(cart);
+
+
 		return View();
+	}
+
+	private async Task SaveOrder(ShoppingCart? cart, CancellationToken cancellationToken= default)
+	{
+		try { 
+		
+			// fill sales invoice items List
+			var lstInvoiceItems = new List<TbSalesInvoiceItem>();
+			foreach (var cartItem in cart?.Items!)
+			{
+				lstInvoiceItems.Add(new TbSalesInvoiceItem
+				{
+					ItemId = cartItem.ItemId,
+					Qty = cartItem.Quantity,
+					InvoicePrice = cartItem.Price,
+				});
+			}
+
+			// assign sales items into a new invoice
+			var salesInvoiceObj = new TbSalesInvoice() { 
+			CreatedDate = DateTime.UtcNow,
+			CreatedBy = User.GetUserId()!,
+			CustomerId = 3,
+			DelivryDate = DateTime.UtcNow.AddDays(5),
+
+			//TbSalesInvoiceItems = lstInvoiceItems, // when adding sales invoice it will adding this list , but this ok when adding new invoice but what if we need to update [comparing 2 lists]
+			};
+
+			await _salesInvoiceService.Save(salesInvoiceObj, lstInvoiceItems, true, User.GetUserId()!, cancellationToken);
+
+		}	
+		catch (Exception e){
+		
+		}
 	}
 }

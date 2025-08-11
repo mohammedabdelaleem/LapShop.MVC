@@ -4,13 +4,13 @@
 		<div class="img-wrapper">
 			<div class="front">
 				<a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
-					<img src="~/Uploads/Items/x.png"
+				<img src="~/Uploads/Items/@Model.ImageName"
 						 class="img-fluid blur-up lazyload bg-img" alt="">
 				</a>
 			</div>
 			<div class="back">
 			<a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
-					<img src="~/Uploads/Items/y.png"
+				<img src="~/Uploads/Items/@Model.ImageName"
 						 class="img-fluid blur-up lazyload bg-img" alt="">
 				</a>
 			</div>

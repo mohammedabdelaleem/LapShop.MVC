@@ -38,10 +38,13 @@ public static class DependencyInjection
 		services.AddScoped<IItemTypeService, ItemTypeService>();
 		services.AddScoped<IOsService, OsService>();
 		services.AddScoped<IItemImagesService, ItemImagesService>();
+		services.AddScoped<ISalesInvoiceService, SalesInvoiceService>();
+		services.AddScoped<ISalesInvoiceItemsService, SalesInvoiceItemsService>();
+
 
 
 		return services;
-	}
+	} 
 
 
 	private static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
