@@ -7,9 +7,9 @@ public class VmHomePage
 	public List<ItemResponse> NewItems { get; set; } = [];
 	public List<ItemResponse> FreeDelivery { get; set; } = [];
 	public List<ItemResponse> FeautureItems { get; set; } = [];
-	public List<TbCategory> Categories { get; set; } = [];
+	public List<CategoryResponse> Categories { get; set; } = [];
 
-	public List<TbSlider> Sliders { get; set; } = [];
+	public List<SliderResponse> Sliders { get; set; } = [];
 	public TbSettings Settings { get; set; } = new();
 
 }

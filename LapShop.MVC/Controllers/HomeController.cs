@@ -1,9 +1,14 @@
 
 namespace LapShop.MVC.Controllers
 {
-    public class HomeController(IItemService itemService) : Controller
+    public class HomeController(
+		IItemService itemService,
+		ISliderService sliderService,
+		ICategoryService categoryService) : Controller
     {
 		private readonly IItemService _itemService = itemService;
+		private readonly ISliderService _sliderService = sliderService;
+		private readonly ICategoryService _categoryService = categoryService;
 
 		public async Task<IActionResult> Index(CancellationToken cancellationToken=default)
         {
@@ -19,7 +24,8 @@ namespace LapShop.MVC.Controllers
 				NewItems = items.SkipLast(40).TakeLast(10).ToList(),
 				FreeDelivery = items.TakeLast(4).ToList(),
 				FeautureItems = items.SkipLast(90).TakeLast(10).ToList(),
-				//Categories = 
+				Sliders = await _sliderService.GetAllInShortAsync(cancellationToken),
+				Categories = await _categoryService.GetAllInShortAsync(4,cancellationToken)
 			};
 
 

@@ -19,10 +19,12 @@
                     <p class="card-description"> Basic form layout </p>
                     <form class="forms-sample" method="post" enctype="multipart/form-data"
                     asp-controller="Category" asp-action="Save" role="form">
+                        <input asp-for="CurrentState" type="hidden" />
                         <input asp-for="CategoryId" type="hidden" />
                         <input asp-for="CreatedBy" type="hidden" />
                         <input asp-for="CreatedDate" type="hidden" />
                         <input asp-for="ImageName" type="hidden" />
+
                         <div class="form-group">
                             <label asp-for="CategoryName">@ResAdmin.lblCategoryName</label>
                             <input asp-for="CategoryName" type="text" class="form-control" placeholder="Category Name">

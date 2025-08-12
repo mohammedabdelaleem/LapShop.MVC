@@ -5,7 +5,7 @@ namespace LapShop.MVC.Services;
 
 public interface ICategoryService
 {
-	Task<List<CategoryResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default);
+	Task<List<CategoryResponse>> GetAllInShortAsync(int size=100, CancellationToken cancellationToken = default);
 	Task<List<TbCategory>> GetAllAsync(CancellationToken cancellationToken = default);
 	Task<TbCategory> GetAsync(int id, CancellationToken cancellationToken = default);
 	Task AddAsync(TbCategory category, CancellationToken cancellationToken = default);

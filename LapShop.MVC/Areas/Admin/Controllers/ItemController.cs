@@ -19,7 +19,7 @@ public class ItemController(
 
 	public async Task<IActionResult> List(CancellationToken cancellationToken = default)
 	{
-		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken);
+		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken: cancellationToken);
 		ViewBag.ItemTypes = await _itemTypeService.GetAllInShortAsync(cancellationToken);
 
 		// Save selected values to ViewData or ViewBag
@@ -32,7 +32,7 @@ public class ItemController(
 
 	public async Task<IActionResult> Search(int? categoryId, int? itemTypeId, CancellationToken cancellationToken = default)
 	{
-		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken);
+		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken: cancellationToken);
 		ViewBag.ItemTypes = await _itemTypeService.GetAllInShortAsync(cancellationToken);
 
 
@@ -50,7 +50,7 @@ public class ItemController(
 	public async Task<IActionResult> Edit(int? id, CancellationToken cancellationToken = default)
 	{
 
-		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken);
+		ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken: cancellationToken);
 		ViewBag.ItemTypes = await _itemTypeService.GetAllInShortAsync(cancellationToken);
 		ViewBag.Os = await _osService.GetAllInShortAsync(cancellationToken);
 
@@ -75,7 +75,7 @@ public class ItemController(
 
 		if (!ModelState.IsValid)
 		{
-			ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken);
+			ViewBag.Categories = await _categoryService.GetAllInShortAsync(cancellationToken: cancellationToken);
 			ViewBag.ItemTypes = await _itemTypeService.GetAllInShortAsync(cancellationToken);
 			ViewBag.Os = await _osService.GetAllInShortAsync(cancellationToken);
 

@@ -10,11 +10,13 @@ public class CategoryService(AppDBContext context) : ICategoryService
 	private readonly AppDBContext _context = context;
 
 
-	public async Task<List<CategoryResponse>> GetAllInShortAsync(CancellationToken cancellationToken = default) =>
+	public async Task<List<CategoryResponse>> GetAllInShortAsync(int size=100 ,CancellationToken cancellationToken = default) =>
 			await _context.TbCategories
 		.Where(x => x.CurrentState != 0)
-					.ProjectToType<CategoryResponse>()
-					.ToListAsync(cancellationToken);
+		.OrderBy(x=>x.CategoryName)
+		.Take(size)
+		.ProjectToType<CategoryResponse>()
+		.ToListAsync(cancellationToken);
 
 
 	public async Task<List<TbCategory>> GetAllAsync(CancellationToken cancellationToken = default)
