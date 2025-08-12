@@ -9,11 +9,11 @@ public class ItemController(
 	private readonly IItemImagesService _itemImagesService = itemImagesService;
 
 
-	public async Task<IActionResult> Index(CancellationToken cancellationToken = default)
+	public async Task<IActionResult> List(CancellationToken cancellationToken = default)
 	{
 		var items = await _itemService.GetAllItemsDataAsync(size: 50, cancellationToken: cancellationToken);
 
-		return View(nameof(Index), items);
+		return View(nameof(List), items);
 	}
 	public async Task<IActionResult> Details(int id, CancellationToken cancellationToken = default)
 	{
@@ -28,6 +28,12 @@ public class ItemController(
 		return View(nameof(Details), model);
 	}
 
+
+	public async Task<IActionResult> ItemsCategory(int categoryId,  CancellationToken cancellationToken = default)
+	{
+		var result = await _itemService.GetAllItemsDataAsync(categoryId:categoryId, cancellationToken:cancellationToken);
+		return View(nameof(List), result);	
+	}
 
 
 

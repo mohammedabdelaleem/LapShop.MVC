@@ -6,9 +6,6 @@
 }
 
 
-
-
-
 <section class="p-0 layout-7">
     <div class="slide-1 home-slider">
         @foreach (var slider in Model.Sliders)
@@ -41,7 +38,7 @@
             @foreach (var category in Model.Categories)
             {
                 <div class="col-lg-3 col-md-6">
-                    <a href="/Items/ItemList/@category.CategoryId">
+                    <a asp-controller="Item" asp-action="ItemsCategory" asp-route-categoryId="@category.CategoryId" >
                         <div class="collection-banner p-right text-right">
                             <div class="img-part">
                                 <img src="~/Uploads/Categories/@category.ImageName"
@@ -91,11 +88,9 @@
             @foreach (var item in Model.AllItems)
             {
                 <div class="product-box col-xl-2 col-lg-3 col-sm-4 col-6">
-                <partial name="_ItemBox" model="@item" />
+                    <partial name="_ItemBox" model="@item" />
                 </div>
             }
-
-
         </div>
     </div>
 </section>
@@ -174,9 +169,9 @@
 
                                 @foreach (var item in Model.RecommendedItems)
                                 {
-
+                                    <div class="product-box">
                                     <partial name="_ItemBox" model="@item" />
-
+                                    </div>
         
                                 }
 
@@ -188,7 +183,9 @@
                             <div class="product-4 game-product product-m no-arrow">
                                 @foreach (var item in Model.FeautureItems)
                                 {
+                                    <div class="product-box">
                                     <partial name="_ItemBox" model="@item" />
+                                    </div>
                                 }
 
                

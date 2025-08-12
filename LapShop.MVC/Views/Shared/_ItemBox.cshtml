@@ -1,48 +1,39 @@
 ﻿@model ItemResponse
 
-	<div class="product-box">
-		<div class="img-wrapper">
-			<div class="front">
-				<a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
-				<img src="~/Uploads/Items/@Model.ImageName"
-						 class="img-fluid blur-up lazyload bg-img" alt="">
-				</a>
-			</div>
-			<div class="back">
-			<a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
-				<img src="~/Uploads/Items/@Model.ImageName"
-						 class="img-fluid blur-up lazyload bg-img" alt="">
-				</a>
-			</div>
-			<div class="cart-info cart-wrap">
-				<a asp-controller="Order" asp-action="AddToCart" asp-route-itemId="@Model.ItemId"
-					title="Add to cart">
-					<i class="ti-shopping-cart"></i>
-				</a> <a href="javascript:void(0)"
-						 title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#"
-									data-toggle="modal" data-target="#quick-view" title="Quick View">
-					<i class="ti-search" aria-hidden="true"></i>
-				</a> <a href="compare.html"
-					title="Compare"><i class="ti-reload" aria-hidden="true"></i></a>
-			</div>
-		</div>
-
-	<a class="add-button" asp-controller="Order" asp-action="AddToCart" asp-route-itemId="@Model.ItemId">
-		add to cart
-	</a>
-
-		<div class="product-detail">
-			<div class="rating">
-				<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-			</div>
-			<a href="product-page(no-sidebar).html">
-				<h6>@Model.ItemName</h6>
-			</a>
-			<h4>$@Model.SalesPrice</h4>
-			<ul class="color-variant">
-				<li class="bg-light0"></li>
-				<li class="bg-light1"></li>
-				<li class="bg-light2"></li>
-			</ul>
-		</div>
-	</div>
+<div class="img-wrapper">
+    <div class="front">
+        <a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">
+            <img src="~/Uploads/Items/@Model.ImageName"
+                 class="img-fluid blur-up lazyload bg-img" alt="">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a asp-controller="Order" asp-action="AddToCart"
+           asp-route-itemId="@Model.ItemId"
+           title="Add to Wishlist" tabindex="0">
+            <i class="ti-heart"
+               aria-hidden="true"></i>
+        </a>
+        <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View" tabindex="0">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+        <a href="compare.html" title="Compare" tabindex="0">
+            <i class="ti-reload"
+               aria-hidden="true"></i>
+        </a>
+    </div>
+    <a asp-controller="Order" asp-action="AddToCart"
+       asp-route-itemId="@Model.ItemId" class="add-button">
+        add to
+        cart
+    </a>
+</div>
+<div class="product-detail">
+    <div class="rating">
+        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+    </div>
+    <a href="product-page(no-sidebar).html">
+        <h6>@Model.ItemName</h6>
+    </a>
+    <h4>$@Model.SalesPrice</h4>
+</div>
