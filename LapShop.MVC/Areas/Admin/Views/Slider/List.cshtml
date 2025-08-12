@@ -1,0 +1,83 @@
+﻿@model List<SliderResponse>
+
+
+@section Styles {
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css" />
+}
+
+<div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">Data Table</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Items</h4>
+
+                    
+                    <!-- New Item Button -->
+                    <div class="mb-3">
+                        <a asp-controller="Slider" asp-action="Edit" asp-area="@DefaultRoles.Admin"
+                           class="btn btn-success">@ResGeneral.lblNew</a>
+                    </div>
+
+                    <!-- Data Table -->
+                    <table id="order-listing" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>@ResAdmin.lblImage</th>
+                                <th>@ResGeneral.lblTitle</th>
+                                <th>@ResGeneral.lblDescription</th>
+                                <th>@ResGeneral.lblActions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="/Uploads/Sliders/@item.ImageName" />
+                                    </td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <a asp-controller="Slider" asp-action="Details" asp-route-id="@item.SliderId"
+                                           class="btn btn-primary btn-sm">@ResGeneral.lblDetails</a>
+
+                                        <a asp-controller="Slider" asp-action="Edit" asp-route-id="@item.SliderId"
+                                           class="btn btn-info btn-sm">@ResGeneral.lblEdit</a>
+
+                                        <a asp-controller="Slider" asp-action="Delete" asp-route-id="@item.SliderId"
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure?');">@ResGeneral.lblDelete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- plugins:js -->
+    <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- Plugin js for this page -->
+    <script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <!-- Custom js for this page -->
+    <script src="~/Admin/js/data-table.js"></script>
+
+   
+}

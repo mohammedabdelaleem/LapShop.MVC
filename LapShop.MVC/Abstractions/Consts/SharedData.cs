@@ -2,5 +2,5 @@
 
 public static class SharedData
 {
-	public const string AdminArea = "admin";
+	//public const string AdminArea = "admin";
 }

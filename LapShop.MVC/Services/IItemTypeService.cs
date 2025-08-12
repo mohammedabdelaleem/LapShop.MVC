@@ -1,6 +1,4 @@
-﻿using LapShop.MVC.Contracts;
-
-namespace LapShop.MVC.Services;
+﻿namespace LapShop.MVC.Services;
 
 public interface IItemTypeService
 {

@@ -1,5 +1,4 @@
-﻿@using LapShop.MVC.Abstractions.Consts
-@model List<ItemResponse>
+﻿@model List<ItemResponse>
 
 @section Styles {
     <!-- Plugin css for this page -->
@@ -46,7 +45,7 @@
 
                     <!-- New Item Button -->
                     <div class="mb-3">
-                        <a asp-controller="Item" asp-action="Edit" asp-area="@SharedData.AdminArea"
+                        <a asp-controller="Item" asp-action="Edit" asp-area="@DefaultRoles.Admin"
                            class="btn btn-success">@ResGeneral.lblNew</a>
                     </div>
 

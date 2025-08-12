@@ -1,8 +1,4 @@
-﻿
-using LapShop.MVC.Persistance;
-using Microsoft.EntityFrameworkCore;
-
-namespace LapShop.MVC.Services;
+﻿namespace LapShop.MVC.Services;
 
 public class ItemImagesService(AppDBContext context) : IItemImagesService
 {

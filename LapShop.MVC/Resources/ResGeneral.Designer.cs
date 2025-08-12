@@ -79,6 +79,15 @@ namespace LapShop.MVC.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string lblDescription {
+            get {
+                return ResourceManager.GetString("lblDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         public static string lblDetails {
@@ -111,6 +120,15 @@ namespace LapShop.MVC.Resources {
         public static string lblSave {
             get {
                 return ResourceManager.GetString("lblSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string lblTitle {
+            get {
+                return ResourceManager.GetString("lblTitle", resourceCulture);
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using LapShop.MVC.Persistance;
-using Mapster;
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace LapShop.MVC.Services;
 
