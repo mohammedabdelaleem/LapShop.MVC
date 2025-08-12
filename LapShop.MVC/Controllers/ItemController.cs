@@ -8,6 +8,13 @@ public class ItemController(
 	private readonly IItemService _itemService = itemService;
 	private readonly IItemImagesService _itemImagesService = itemImagesService;
 
+
+	public async Task<IActionResult> Index(CancellationToken cancellationToken = default)
+	{
+		var items = await _itemService.GetAllItemsDataAsync(size: 50, cancellationToken: cancellationToken);
+
+		return View(nameof(Index), items);
+	}
 	public async Task<IActionResult> Details(int id, CancellationToken cancellationToken = default)
 	{
 
@@ -20,4 +27,8 @@ public class ItemController(
 		
 		return View(nameof(Details), model);
 	}
+
+
+
+
 }

@@ -10,7 +10,7 @@ namespace LapShop.MVC.Controllers
 			// simulation , but this depends on buisiness
 			
 
-			var items = await _itemService.GetAllItemsDataAsync(size:300,cancellationToken: cancellationToken);
+			var items = await _itemService.GetAllItemsDataAsync(size:50,cancellationToken: cancellationToken);
 
 			var model = new VmHomePage
 			{
