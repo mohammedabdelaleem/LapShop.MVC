@@ -54,10 +54,12 @@ public partial class AppDBContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<VwSalesInvoice> VwSalesInvoices { get; set; }
 
+
+
 	#endregion
 
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
        
         base.OnModelCreating(modelBuilder);

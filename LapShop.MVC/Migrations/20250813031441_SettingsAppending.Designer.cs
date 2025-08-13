@@ -4,6 +4,7 @@ using LapShop.MVC.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LapShop.MVC.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250813031441_SettingsAppending")]
+    partial class SettingsAppending
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +46,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -50,6 +54,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -185,6 +190,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("");
@@ -196,6 +202,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("");
@@ -211,7 +218,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("TbCategories", (string)null);
+                    b.ToTable("TbCategories");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbCustomer", b =>
@@ -223,12 +230,13 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("CustomerName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("TbCustomers", (string)null);
+                    b.ToTable("TbCustomers");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbItem", b =>
@@ -326,7 +334,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasIndex(new[] { "OsId" }, "IX_TbItems_OsId");
 
-                    b.ToTable("TbItems", (string)null);
+                    b.ToTable("TbItems");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbItemDiscount", b =>
@@ -362,6 +370,7 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -372,7 +381,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("TbItemImages", (string)null);
+                    b.ToTable("TbItemImages");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbItemType", b =>
@@ -384,6 +393,7 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemTypeId"));
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -396,6 +406,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemTypeName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -407,7 +418,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasKey("ItemTypeId");
 
-                    b.ToTable("TbItemTypes", (string)null);
+                    b.ToTable("TbItemTypes");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbO", b =>
@@ -419,6 +430,7 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OsId"));
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -428,9 +440,11 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OsName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -445,7 +459,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasKey("OsId");
 
-                    b.ToTable("TbOs", (string)null);
+                    b.ToTable("TbOs");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbPurchaseInvoice", b =>
@@ -471,7 +485,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("TbPurchaseInvoices", (string)null);
+                    b.ToTable("TbPurchaseInvoices");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbPurchaseInvoiceItem", b =>
@@ -502,7 +516,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("TbPurchaseInvoiceItems", (string)null);
+                    b.ToTable("TbPurchaseInvoiceItems");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbSalesInvoice", b =>
@@ -514,6 +528,7 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("");
@@ -549,7 +564,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.ToTable("TbSalesInvoices", (string)null);
+                    b.ToTable("TbSalesInvoices");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbSalesInvoiceItem", b =>
@@ -583,7 +598,7 @@ namespace LapShop.MVC.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("TbSalesInvoiceItems", (string)null);
+                    b.ToTable("TbSalesInvoiceItems");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbSettings", b =>
@@ -595,38 +610,48 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ContactNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FacebookLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstgramLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastBanner")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleBanner")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TwitterLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WebsiteDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WebsiteName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("YoutubeLink")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.TbSlider", b =>
@@ -679,13 +704,14 @@ namespace LapShop.MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierId"));
 
                     b.Property<string>("SupplierName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("SupplierId")
                         .HasName("PK_TbSupplier");
 
-                    b.ToTable("TbSuppliers", (string)null);
+                    b.ToTable("TbSuppliers");
                 });
 
             modelBuilder.Entity("LapShop.MVC.Models.VwItem", b =>
@@ -694,10 +720,12 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -723,6 +751,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ItemName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -730,6 +759,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ItemTypeName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -737,6 +767,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OsName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -778,6 +809,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -789,6 +821,7 @@ namespace LapShop.MVC.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ItemName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -806,6 +839,7 @@ namespace LapShop.MVC.Migrations
             modelBuilder.Entity("LapShop.MVC.Models.VwItemsOutOfInvoice", b =>
                 {
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 

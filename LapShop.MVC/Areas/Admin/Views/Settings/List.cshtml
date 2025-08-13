@@ -1,0 +1,88 @@
+﻿@model TbSettings
+
+<div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+        <div class="content-wrapper">
+
+            <!-- Header -->
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h3 class="page-title">Website Settings</h3>
+                <a asp-controller="Settings" asp-action="Edit" class="btn btn-primary">
+                    <i class="mdi mdi-pencil"></i> Edit
+                </a>
+            </div>
+
+            <!-- Card View -->
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h4 class="card-title">General Information</h4>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Website Name:</div>
+                        <div class="col-sm-8">@Model.WebsiteName</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Description:</div>
+                        <div class="col-sm-8">@Model.WebsiteDescription</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Facebook:</div>
+                        <div class="col-sm-8"><a href="@Model.FacebookLink" target="_blank">@Model.FacebookLink</a></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Twitter:</div>
+                        <div class="col-sm-8"><a href="@Model.TwitterLink" target="_blank">@Model.TwitterLink</a></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Youtube:</div>
+                        <div class="col-sm-8"><a href="@Model.YoutubeLink" target="_blank">@Model.YoutubeLink</a></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Instagram:</div>
+                        <div class="col-sm-8"><a href="@Model.InstgramLink" target="_blank">@Model.InstgramLink</a></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 font-weight-bold">Contact Number:</div>
+                        <div class="col-sm-8">@Model.ContactNumber</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Image Blocks Section -->
+            <div class="row mt-4">
+                <!-- Logo -->
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-header font-weight-bold">Logo</div>
+                        <div class="card-body">
+                            <img src="~/Uploads/Settings/@Model.Logo" alt="Website Logo" class="img-fluid rounded shadow-sm" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Banner -->
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-header font-weight-bold">Middle Banner</div>
+                        <div class="card-body">
+                            <img src="~/Uploads/Settings/@Model.MiddleBanner" alt="Middle Banner" class="img-fluid rounded shadow-sm" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Banner -->
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-header font-weight-bold">Last Banner</div>
+                        <div class="card-body">
+                            <img src="~/Uploads/Settings/@Model.LastBanner" alt="Last Banner" class="img-fluid rounded shadow-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

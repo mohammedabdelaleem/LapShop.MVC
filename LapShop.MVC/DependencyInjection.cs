@@ -39,8 +39,9 @@ public static class DependencyInjection
 		services.AddScoped<ISalesInvoiceService, SalesInvoiceService>();
 		services.AddScoped<ISalesInvoiceItemsService, SalesInvoiceItemsService>();
 		services.AddScoped<ISliderService, SliderService>();
+		services.AddScoped<ISettingsService, SettingsService>();
 
-	
+
 		return services;
 	} 
 

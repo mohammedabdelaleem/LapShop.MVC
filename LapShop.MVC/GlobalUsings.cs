@@ -19,3 +19,4 @@ global using Newtonsoft.Json;
 
 global using LapShop.MVC.Abstractions.Consts;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using static LapShop.MVC.Abstractions.Consts.SharedData;
