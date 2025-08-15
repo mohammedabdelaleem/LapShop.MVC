@@ -10,7 +10,7 @@ public class TbSettings
 	public string FacebookLink { get; set; }
 	public string TwitterLink { get; set; }
 	public string YoutubeLink { get; set; }
-
+	public string GoogleLink { get; set; }
 	public string InstgramLink { get; set; }
 
 

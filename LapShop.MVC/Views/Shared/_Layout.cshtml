@@ -5,7 +5,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LapShop.MVC</title>
+    <title id="website-titel"></title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -441,6 +441,7 @@
                                                      class="img-fluid blur-up lazyload" alt=""> <i class="ti-shopping-cart"></i>
                                             </div>
                                             <ul class="show-div shopping-cart">
+                                                @* ToDo : Make Dynamic  *@
                                                 <li>
                                                     <div class="media">
                                                         <a href="#">
@@ -529,11 +530,11 @@
                             </p>
                             <div class="footer-social">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                    <li><a id="lnkFacebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a id="lnkGoogle" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    <li><a id="lnkTwitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a id="lnkInstagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a id="lnkYoutube" href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1520,6 +1521,8 @@
     <!-- Theme js-->
     <script src="~/Frontend/js/script.js"></script>
 
+	<script src="~/modules/helper.js"></script>
+	<script src="~/modules/settings.js"></script>
     <script>
         $(window).on('load', function () {
             setTimeout(function () {
