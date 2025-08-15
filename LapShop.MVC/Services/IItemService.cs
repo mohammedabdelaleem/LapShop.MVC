@@ -12,6 +12,7 @@ public interface IItemService
 	Task<ItemResponse?> GetItemResponseAsync(int id, CancellationToken cancellationToken = default);
 	Task AddAsync(TbItem item, CancellationToken cancellationToken = default);
 	Task<bool> UpdateAsync(int itemId, TbItem item, CancellationToken cancellationToken);
+	Task<bool> SaveAsync(TbItem item, string userId, CancellationToken cancellationToken = default);
 	Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default);
 	Task<string> GetImageFileAsync(int itemId, CancellationToken cancellationToken);
 }

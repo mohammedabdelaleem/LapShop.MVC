@@ -382,6 +382,9 @@
                                                 <a asp-controller="Item" asp-action="Index">Products</a>
                                             </li>
                                             <li>
+                                                <a asp-controller="Item" asp-action="ItemList">Products Api</a>
+                                            </li>
+                                            <li>
                                                 <a href="#">Abouts Us</a>
                                             </li>
                                             <li><a href="#">Terms Of Use</a></li>
@@ -415,6 +418,9 @@
                                         </li>
                                         <li>
                                             <a asp-controller="Item" asp-action="Index">Products</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Item" asp-action="ItemList">Products Api</a>
                                         </li>
                                         <li>
                                             <a href="#">About Us</a>
@@ -1523,20 +1529,7 @@
 
 	<script src="~/modules/helper.js"></script>
 	<script src="~/modules/settings.js"></script>
-    <script>
-        $(window).on('load', function () {
-            setTimeout(function () {
-                $('#exampleModal').modal('show');
-            }, 2500);
-        });
-        function openSearch() {
-            document.getElementById("search-overlay").style.display = "block";
-        }
-
-        function closeSearch() {
-            document.getElementById("search-overlay").style.display = "none";
-        }
-    </script>
+   
     @RenderSection("scripts", false)
 </body>
 

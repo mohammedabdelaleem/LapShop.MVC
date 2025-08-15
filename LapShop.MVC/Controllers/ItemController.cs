@@ -15,6 +15,11 @@ public class ItemController(
 
 		return View(nameof(List), items);
 	}
+
+	public  IActionResult ItemList()
+	{
+		return View();
+	}
 	public async Task<IActionResult> Details(int id, CancellationToken cancellationToken = default)
 	{
 
