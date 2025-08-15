@@ -78,6 +78,41 @@ public class ItemService(AppDBContext context) : IItemService
 		return true;
 	}
 
+
+	public async Task<bool> SaveAsync(TbItem item,string userId, CancellationToken cancellationToken=default)
+	{
+		try
+		{
+			if (item.ItemId == 0)
+			{
+				item.CurrentState = 1;
+				item.CreatedBy = userId;
+				item.CreatedDate = DateTime.UtcNow;
+				await _context.TbItems.AddAsync(item, cancellationToken);
+			}
+			else
+			{
+			
+				if(await GetAsync(item.ItemId, cancellationToken) is not { } itemDB)
+					return false;
+
+				item.Adapt(itemDB);
+
+				// Set metadata AFTER mapping to avoid overwriting
+				itemDB.UpdatedBy = userId;
+				itemDB.UpdatedDate = DateTime.UtcNow;
+			}
+			await _context.SaveChangesAsync( cancellationToken);
+			return true;
+		}
+		catch
+		{
+			// ToDo:log
+			return false;
+		}
+	}
+
+
 	public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
 	{
 		var model = await GetAsync(id, cancellationToken);
