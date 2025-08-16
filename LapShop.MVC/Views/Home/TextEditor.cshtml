@@ -1,0 +1,19 @@
+﻿@model Article
+
+<form asp-action="Save" method="post">
+
+    <div class="form-group">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control w-100 h-25" id="editor1"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+@section scripts {
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor1");
+    </script>
+}

@@ -37,5 +37,22 @@ namespace LapShop.MVC.Controllers
 			return View();
 		}
 
+
+
+		public IActionResult TestTextEditor()
+		{
+			var article = new Article();
+			return View("TextEditor", article);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Save(Article article)
+		{
+			// Thanks Allah???
+			// Content will now contain the HTML typed by the user
+			// You can save it to the database
+			return View();
+		}
 	}
 }
